@@ -1,5 +1,8 @@
+import imp
 from flask import Flask, render_template
 import random
+import movie
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -17,5 +20,10 @@ def food():
     foodname = random.choice(foodlist)
     return render_template('food.html', data=foodname)
 
+@app.route('/movie')
+def movieurl():
+    titles = movie.get_rank()
+    return render_template('movie.html', data=titles)
+
 if __name__ == '__main__':
-    app.run()
+    app.run(host="0.0.0.0", port=80)
